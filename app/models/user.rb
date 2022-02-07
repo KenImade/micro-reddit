@@ -3,4 +3,7 @@ class User < ApplicationRecord
     validates :userName, presence: true, uniqueness: true
     validates :firstName, presence: true, length: {minimum: 2}
     validates :lastName, presence: true, length: {minimum: 2}
+
+    has_many :Posts
+    has_many :Comments
 end

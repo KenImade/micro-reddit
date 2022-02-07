@@ -10,7 +10,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_02_06_200905) do
+ActiveRecord::Schema.define(version: 2022_02_07_194417) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.integer "User_id", null: false
+    t.integer "Post_id", null: false
+    t.index ["Post_id"], name: "index_comments_on_Post_id"
+    t.index ["User_id"], name: "index_comments_on_User_id"
+  end
 
   create_table "posts", force: :cascade do |t|
     t.string "title"
@@ -30,5 +40,7 @@ ActiveRecord::Schema.define(version: 2022_02_06_200905) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "comments", "Posts"
+  add_foreign_key "comments", "Users"
   add_foreign_key "posts", "Users"
 end
